@@ -1,20 +1,21 @@
 {
-  "name": "apio_node",
-  "version": "1.0.0",
+  "name": "apio-node",
+  "version": "1.0.1",
   "description": "Apio helps in error & performance monitoring of your application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "error",
-    "tracking",
-    "performance",
-    "monitoring",
+    "error tracking",
+    "performance monitoring",
     "apm",
-    "error",
-    "monitoring"
+    "error monitoring"
   ],
   "author": "apio",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apio-monitor/apio_node.git"
+  }
 }
