@@ -1,6 +1,5 @@
-const http = require('http');
+const https = require('https');
 const ip = require('ip');
-const createError = require('http-errors');
 const config = require('./config')
 
 function apio_process_request(req, res, next) {
@@ -46,8 +45,8 @@ function send_perf_request(perf_data){
 	const data = JSON.stringify(perf_data);
 
 	const options = {
-	  hostname: 'localhost',
-	  port: 8000,
+	  hostname: 'https://apio.in',
+	  port: 443,
 	  path: '/remote_perf_data',
 	  method: 'POST',
 	  headers: {
@@ -76,8 +75,8 @@ function send_exception_request(exception_data){
 	const data = JSON.stringify(exception_data);
 
 	const options = {
-	  hostname: 'localhost',
-	  port: 8000,
+	  hostname: 'https://apio.in',
+	  port: 443,
 	  path: '/remote_data_exception',
 	  method: 'POST',
 	  headers: {

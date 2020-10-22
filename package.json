@@ -1,6 +1,6 @@
 {
   "name": "apio_node",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Apio helps in error & performance monitoring of your application",
   "main": "index.js",
   "scripts": {
@@ -17,5 +17,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/apio-monitor/apio_node.git"
+  },
+  "dependencies": {
+    "ip": "2.1.3"
   }
 }
