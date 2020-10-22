@@ -45,18 +45,18 @@ function send_perf_request(perf_data){
 	const data = JSON.stringify(perf_data);
 
 	const options = {
-	  hostname: 'https://apio.in',
+	  hostname: 'apio.in',
 	  port: 443,
 	  path: '/remote_perf_data',
 	  method: 'POST',
 	  headers: {
 	    'Content-Type': 'application/json',
 	    'Content-Length': data.length,
-	    'x-api-key': config.apio_token;
+	    'x-api-key': config.apio_token
 	  }
 	}
 
-	const req = http.request(options, res => {
+	const req = https.request(options, res => {
   		console.log(`statusCode: ${res.statusCode}`)
   		res.on('data', d => {
     		process.stdout.write(d)
@@ -75,18 +75,18 @@ function send_exception_request(exception_data){
 	const data = JSON.stringify(exception_data);
 
 	const options = {
-	  hostname: 'https://apio.in',
+	  hostname: 'apio.in',
 	  port: 443,
 	  path: '/remote_data_exception',
 	  method: 'POST',
 	  headers: {
 	    'Content-Type': 'application/json',
 	    'Content-Length': data.length,
-	    'x-api-key': config.apio_token;
+	    'x-api-key': config.apio_token
 	  }
 	}
 
-	const req = http.request(options, res => {
+	const req = https.request(options, res => {
   		console.log(`statusCode: ${res.statusCode}`)
   		res.on('data', d => {
     		process.stdout.write(d)
