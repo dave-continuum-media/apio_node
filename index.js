@@ -2,27 +2,26 @@ const https = require('https');
 const ip = require('ip');
 const config = require('./config')
 
-function apio_process_request(req, res, next) {
+function process_request(req, res, next) {
   // this middleware adds request timestamp
-  req.requestTime = Date.now()/1000;
+	req.requestTime = Date.now()/1000;
+  	res.on("finish", function(){
+  		// this middleware collects performance data
+  		const request_obj = {};
+		request_obj.request_timestamp = req.requestTime;
+  		request_obj.response_timestamp = Date.now()/1000;
+  		request_obj.ip_address = ip.address();
+  		request_obj.path = req.protocol + "://" + 
+  		req.get('host') + req.originalUrl;
+  		request_obj.requester = null;
+  		request_obj.response_code = res.statusCode;
+  		send_perf_request(request_obj);
+  		next();
+  })
   next();
 }
 
-function apio_process_response(req, res, next) {
-  // this middleware collects performance data
-  const request_obj = {};
-  request_obj.request_timestamp = req.requestTime;
-  request_obj.response_timestamp = Date.now()/1000;
-  request_obj.ip_address = ip.address();
-  request_obj.path = req.protocol + "://" + 
-  	req.get('host') + req.originalUrl;
-  request_obj.requester = null;
-  request_obj.response_code = res.statusCode;
-  send_perf_request(request_obj);
-  next();
-}
-
-function apio_process_exception(err, req, res, next) {
+function process_exception(err, req, res, next) {
   // this middleware collects exception data
   const error_obj = {};
   error_obj.path = req.protocol + "://" + 
@@ -32,13 +31,12 @@ function apio_process_exception(err, req, res, next) {
   error_obj.user = null;
   error_obj.ip_address = ip.address();
   send_exception_request(error_obj);
-  next();
+  next(err);
 }
 
 // exports middleware
-module.exports.apio_process_request = apio_process_request ;
-module.exports.apio_process_response = apio_process_response ;
-module.exports.apio_process_exception = apio_process_exception ;
+module.exports.process_request = process_request;
+module.exports.process_exception = process_exception ;
 
 function send_perf_request(perf_data){
 	// this posts perf data to apio server
