@@ -17,7 +17,6 @@ function process_request(req, res, next) {
   		request_obj.requester = null;
   		request_obj.response_code = res.statusCode;
   		send_perf_request(request_obj);
-  		next();
   })
   next();
 }

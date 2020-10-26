@@ -1,6 +1,6 @@
 {
   "name": "apio_node",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Apio helps in error & performance monitoring of your application",
   "main": "index.js",
   "scripts": {
