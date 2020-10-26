@@ -9,6 +9,7 @@ function process_request(req, res, next) {
   		// this middleware collects performance data
   		const request_obj = {};
 		request_obj.request_timestamp = req.requestTime;
+		request_obj.method = req.method;
   		request_obj.response_timestamp = Date.now()/1000;
   		request_obj.ip_address = ip.address();
   		request_obj.path = req.protocol + "://" + 
@@ -25,7 +26,8 @@ function process_exception(err, req, res, next) {
   // this middleware collects exception data
   const error_obj = {};
   error_obj.path = req.protocol + "://" + 
-  	req.hostname + req.originalUrl;
+  	req.get('host') + req.originalUrl;
+  error_obj.method = req.method;
   error_obj.exception = "error occured";
   error_obj.traceback = err.stack;
   error_obj.user = null;
